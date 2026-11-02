@@ -1,0 +1,8 @@
+# Cloudflare Worker配置
+name = "peach-blossom-fortune"
+main = "worker.js"
+compatibility_date = "2024-10-01"
+
+# 环境变量配置
+[vars]
+VOLC_API_KEY = "VxCgNvLTE.ChBaY1dBZlVwM3hqdFJtNkptEPy78vcHGAEqEHf4Ug_GKUqwo5Ob5TvDxIE.n3qDGY_FlSdQm6-Brqy5rYwW0ZSXTfZABCDd6CrsAmAZnMgw5297Af7_mrvLOGZ9R82xF4MEMtFiofM-QyyFXweZ"
