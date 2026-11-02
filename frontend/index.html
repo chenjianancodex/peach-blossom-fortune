@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI恋爱桃花运测评 💕</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 首页/测评页面 -->
+    <div id="quiz-page" class="page active">
+        <div class="container">
+            <header class="hero">
+                <h1>💫 AI恋爱桃花运测评</h1>
+                <p>上传照片 + 回答趣味问题<br>解锁你的专属桃花运报告</p>
+            </header>
+
+            <div class="quiz-form">
+                <!-- 照片上传区域 -->
+                <div class="upload-section">
+                    <h2>1️⃣ 上传你的照片</h2>
+                    <div id="upload-area" class="upload-area">
+                        <div class="upload-icon">📷</div>
+                        <p>点击或拖拽上传照片</p>
+                        <p class="hint">请上传清晰的正面照片</p>
+                        <input type="file" id="photo-input" accept="image/*" style="display:none;">
+                    </div>
+                    <div id="preview-area" class="preview-area" style="display:none;">
+                        <img id="preview-img" src="" alt="预览">
+                        <button id="reupload-btn" class="btn-secondary">重新上传</button>
+                    </div>
+                </div>
+
+                <!-- 趣味问答区域 -->
+                <div class="questions-section">
+                    <h2>2️⃣ 回答趣味问题</h2>
+
+                    <div class="question">
+                        <h3>Q1: 你理想中的约会场景是？</h3>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q1" value="海滩漫步">
+                                <span>🏖️ 海滩漫步</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q1" value="城市探索">
+                                <span>🌆 城市探索</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q1" value="宅家看电影">
+                                <span>🎬 宅家看电影</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q1" value="旅行冒险">
+                                <span>✈️ 旅行冒险</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <h3>Q2: 你最在意伴侣的哪个特质？</h3>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q2" value="幽默感">
+                                <span>😄 幽默感</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q2" value="责任心">
+                                <span>💪 责任心</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q2" value="才华">
+                                <span>🎨 才华</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q2" value="外貌">
+                                <span>✨ 外貌</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <h3>Q3: 你的周末通常怎么过？</h3>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q3" value="社交聚会">
+                                <span>🎉 社交聚会</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q3" value="独处充电">
+                                <span>📚 独处充电</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q3" value="户外运动">
+                                <span>🏃 户外运动</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q3" value="学习提升">
+                                <span>🎓 学习提升</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 提交按钮 -->
+                <button id="submit-btn" class="btn-primary" disabled>开始AI分析</button>
+            </div>
+
+            <!-- 加载状态 -->
+            <div id="loading-state" class="loading-state" style="display:none;">
+                <div class="spinner"></div>
+                <p>AI正在分析你的照片和回答...</p>
+                <p class="hint">预计需要3-5秒</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 结果展示页面 -->
+    <div id="result-page" class="page">
+        <div class="container">
+            <header class="hero">
+                <h1>✨ 你的桃花运报告</h1>
+            </header>
+
+            <div class="result-content">
+                <!-- 桃花运指数 -->
+                <div class="score-card">
+                    <div class="score-circle">
+                        <div class="score-number" id="score-number">0</div>
+                        <div class="score-label">桃花运指数</div>
+                    </div>
+                    <p class="score-comment" id="score-comment"></p>
+                </div>
+
+                <!-- 桃花时间 -->
+                <div class="info-card">
+                    <h3>🌸 桃花盛开时间</h3>
+                    <p id="blossom-time"></p>
+                </div>
+
+                <!-- 理想伴侣特征 -->
+                <div class="info-card">
+                    <h3>💝 理想伴侣特征</h3>
+                    <div id="partner-traits" class="traits-tags"></div>
+                </div>
+
+                <!-- 爱情优势 -->
+                <div class="info-card">
+                    <h3>⭐ 你的爱情优势</h3>
+                    <p id="love-advantage"></p>
+                </div>
+
+                <!-- 小建议 -->
+                <div class="info-card">
+                    <h3>💡 小建议</h3>
+                    <p id="advice"></p>
+                </div>
+
+                <!-- 操作按钮 -->
+                <div class="actions">
+                    <button id="share-btn" class="btn-primary">📤 分享我的结果</button>
+                    <button id="retake-btn" class="btn-secondary">🔄 再测一次</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 分享卡片弹窗 -->
+    <div id="share-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📤 分享你的桃花运</h2>
+                <button id="close-modal" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <canvas id="share-canvas" width="600" height="800"></canvas>
+                <div class="share-actions">
+                    <button id="download-btn" class="btn-primary">💾 下载图片</button>
+                    <button id="copy-link-btn" class="btn-secondary">🔗 复制链接</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="api-config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
